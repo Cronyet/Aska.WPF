@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "hzdTB5V1zDRggA//ZgR2gAoanx8K2wict39wOaNCGICs5TJ1RRe49KZyvvTj8a6IuxHrQUJ3S4rIyXTcMsPZ4g==",
+  "success": true,
+  "projectFilePath": "E:\\OneDrive\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\23699\\.nuget\\packages\\microsoft.ui.xaml\\2.7.0\\microsoft.ui.xaml.2.7.0.nupkg.sha512",
+    "C:\\Users\\23699\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\23699\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\23699\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22000.22\\microsoft.windows.sdk.net.ref.10.0.22000.22.nupkg.sha512"
+  ],
+  "logs": []
+}
