@@ -16,5 +16,5 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 19795815637
 Brushes\Brush.xaml;Styles\iOSBall.xaml;Styles\PulseButton.xaml;
 
-True
+False
 
