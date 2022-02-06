@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mDAYJeiXbEWBOHjDI2qmnlPQhqZzOiQILSwc3NQn+ydth2H9pA8Hm8YWi0/OPsQvl2ttralaHYrzfMWq4VyZWw==",
+  "dgSpecHash": "o6h0nbF18LaW6hfAZlyTEbRmmG4JH0t2RBjat7EOWJi9SCet4NASAJMaaOb3Lq3exaAsYkJsPS0xMdpW1XXWUw==",
   "success": true,
-  "projectFilePath": "E:\\OneDrive\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj",
+  "projectFilePath": "E:\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\23699\\.nuget\\packages\\microsoft.ui.xaml\\2.7.0\\microsoft.ui.xaml.2.7.0.nupkg.sha512",
     "C:\\Users\\23699\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\OneDrive\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj": {}
+    "E:\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj": {}
   },
   "projects": {
-    "E:\\OneDrive\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj": {
+    "E:\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\OneDrive\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj",
+        "projectUniqueName": "E:\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj",
         "projectName": "Aska.WPF",
-        "projectPath": "E:\\OneDrive\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj",
+        "projectPath": "E:\\Development\\Projects\\常青园\\Library\\Aska.WPF\\Aska.WPF.csproj",
         "packagesPath": "C:\\Users\\23699\\.nuget\\packages\\",
-        "outputPath": "E:\\OneDrive\\Development\\Projects\\常青园\\Library\\Aska.WPF\\obj\\",
+        "outputPath": "E:\\Development\\Projects\\常青园\\Library\\Aska.WPF\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
