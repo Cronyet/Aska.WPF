@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace PopEye.WPF.Controls.Panels
+namespace Aska.WPF.Controls
 {
     /// <summary>
     /// FishEyePanel
