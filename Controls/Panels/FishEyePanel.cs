@@ -10,10 +10,9 @@ namespace Aska.WPF.Controls
     /// <summary>
     /// FishEyePanel
     /// </summary>
-
     public class FishEyePanel : Panel
     {
-        enum AnimateState { None, Up, Down };
+        private enum AnimateState { None, Up, Down };
 
         public FishEyePanel()
         {
@@ -30,7 +29,8 @@ namespace Aska.WPF.Controls
         }
 
         public static readonly DependencyProperty MagnificationProperty =
-            DependencyProperty.Register("Magnification", typeof(double), typeof(FishEyePanel), new UIPropertyMetadata(2d));
+            DependencyProperty.Register("Magnification", typeof(double),
+                typeof(FishEyePanel), new UIPropertyMetadata(2d));
 
         public int AnimationMilliseconds
         {
@@ -39,7 +39,8 @@ namespace Aska.WPF.Controls
         }
 
         public static readonly DependencyProperty AnimationMillisecondsProperty =
-            DependencyProperty.Register("AnimationMilliseconds", typeof(int), typeof(FishEyePanel), new UIPropertyMetadata(125));
+            DependencyProperty.Register("AnimationMilliseconds", typeof(int),
+                typeof(FishEyePanel), new UIPropertyMetadata(125));
 
         public bool ScaleToFit
         {
@@ -48,34 +49,27 @@ namespace Aska.WPF.Controls
         }
 
         public static readonly DependencyProperty ScaleToFitProperty =
-            DependencyProperty.Register("ScaleToFit", typeof(bool), typeof(FishEyePanel), new UIPropertyMetadata(true));
+            DependencyProperty.Register("ScaleToFit", typeof(bool),
+                typeof(FishEyePanel), new UIPropertyMetadata(true));
 
-        private bool animating = false;
+        private bool animating = false, wasMouseOver = false;
         private Size ourSize;
         private double totalChildWidth = 0;
-        private bool wasMouseOver = false;
 
-        void FishEyePanel_MouseMove(object sender, MouseEventArgs e)
+        private void FishEyePanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!animating)
-                InvalidateArrange();
+            if (!animating) InvalidateArrange();
         }
 
-        void FishEyePanel_MouseEnter(object sender, MouseEventArgs e)
-        {
-            InvalidateArrange();
-        }
+        private void FishEyePanel_MouseEnter(object sender, MouseEventArgs e) => InvalidateArrange();
 
-        void FishEyePanel_MouseLeave(object sender, MouseEventArgs e)
-        {
-            InvalidateArrange();
-        }
+        private void FishEyePanel_MouseLeave(object sender, MouseEventArgs e) => InvalidateArrange();
 
         protected override Size MeasureOverride(Size availableSize)
         {
-            Size idealSize = new Size(0, 0);
+            Size idealSize = new(0, 0);
 
-            Size size = new Size(Double.PositiveInfinity, Double.PositiveInfinity);
+            Size size = new(Double.PositiveInfinity, Double.PositiveInfinity);
             foreach (UIElement child in Children)
             {
                 child.Measure(size);
@@ -83,27 +77,24 @@ namespace Aska.WPF.Controls
                 idealSize.Height = Math.Max(idealSize.Height, child.DesiredSize.Height);
             }
 
-            if (double.IsInfinity(availableSize.Height) || double.IsInfinity(availableSize.Width))
-                return idealSize;
-            else
-                return availableSize;
+            return double.IsInfinity(availableSize.Height)
+                || double.IsInfinity(availableSize.Width)
+                ? idealSize : availableSize;
         }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            if (Children == null || Children.Count == 0)
-                return finalSize;
+            if (Children == null || Children.Count == 0) return finalSize;
 
             ourSize = finalSize;
             totalChildWidth = 0;
 
             foreach (UIElement child in Children)
             {
-
                 if (child.RenderTransform as TransformGroup == null)
                 {
-                    child.RenderTransformOrigin = new Point(0, 0.5);
-                    TransformGroup group = new TransformGroup();
+                    child.RenderTransformOrigin = new(0, 0.5);
+                    TransformGroup group = new();
                     child.RenderTransform = group;
                     group.Children.Add(new ScaleTransform());
                     group.Children.Add(new TranslateTransform());
@@ -119,10 +110,9 @@ namespace Aska.WPF.Controls
             return finalSize;
         }
 
-        void AnimateAll()
+        private void AnimateAll()
         {
-            if (Children == null || Children.Count == 0)
-                return;
+            if (Children == null || Children.Count == 0) return;
 
             animating = true;
 
@@ -130,26 +120,19 @@ namespace Aska.WPF.Controls
 
             double overallScaleFactor = ourSize.Width / totalChildWidth;
 
-            UIElement prevChild = null;
-            UIElement theChild = null;
-            UIElement nextChild = null;
+            UIElement? prevChild = null, theChild = null, nextChild = null;
 
-            double widthSoFar = 0;
-            double theChildX = 0;
-            double ratio = 0;
+            double widthSoFar = 0, theChildX = 0, ratio = 0;
 
             if (IsMouseOver)
             {
                 double x = Mouse.GetPosition(this).X;
                 foreach (UIElement child in Children)
                 {
-                    if (theChild == null)
-                        theChildX = widthSoFar;
+                    if (theChild == null) theChildX = widthSoFar;
                     widthSoFar += (ScaleToFit ? childWidth : child.DesiredSize.Width * overallScaleFactor);
-                    if (x < widthSoFar && theChild == null)
-                        theChild = child;
-                    if (theChild == null)
-                        prevChild = child;
+                    if (x < widthSoFar && theChild == null) theChild = child;
+                    if (theChild == null) prevChild = child;
                     if (nextChild == null && theChild != child && theChild != null)
                     {
                         nextChild = child;
@@ -157,20 +140,16 @@ namespace Aska.WPF.Controls
                     }
                 }
                 if (theChild != null)
-                    ratio = (x - theChildX) / (ScaleToFit ? childWidth : (theChild.DesiredSize.Width * overallScaleFactor));    // Range 0-1 of where the mouse is inside the child
+                    ratio = (x - theChildX) / (ScaleToFit ? childWidth :
+                        (theChild.DesiredSize.Width * overallScaleFactor));
             }
 
-            double mag = Magnification;
-            double extra = 0;
-            if (theChild != null)
-                extra += (mag - 1);
+            double mag = Magnification, extra = 0;
+            if (theChild != null) extra += (mag - 1);
 
-            if (prevChild == null)
-                extra += (ratio * (mag - 1));
-            else if (nextChild == null)
-                extra += ((mag - 1) * (1 - ratio));
-            else
-                extra += (mag - 1);
+            if (prevChild == null) extra += (ratio * (mag - 1));
+            else if (nextChild == null) extra += ((mag - 1) * (1 - ratio));
+            else extra += (mag - 1);
 
             double prevScale = Children.Count * (1 + ((mag - 1) * (1 - ratio))) / (Children.Count + extra);
             double theScale = (mag * Children.Count) / (Children.Count + extra);
@@ -202,49 +181,30 @@ namespace Aska.WPF.Controls
 
             widthSoFar = 0;
             double duration = 0;
-            if (wasMouseOver != IsMouseOver)
-                duration = AnimationMilliseconds;
+            if (wasMouseOver != IsMouseOver) duration = AnimationMilliseconds;
 
             foreach (UIElement child in Children)
             {
                 double scale = otherScale;
-                if (child == prevChild)
-                {
-                    scale = prevScale;
-                }
-                else if (child == theChild)
-                {
-                    scale = theScale;
-                }
-                else if (child == nextChild)
-                {
-                    scale = nextScale;
-                }
+                if (child == prevChild) scale = prevScale;
+                else if (child == theChild) scale = theScale;
+                else if (child == nextChild) scale = nextScale;
 
-                if (ScaleToFit)
-                {
+                if (ScaleToFit) scale *= childWidth / child.DesiredSize.Width;
+                else scale *= overallScaleFactor;
 
-                    scale *= childWidth / child.DesiredSize.Width;
-                }
-                else
-                {
-                    // Apply overall scale so all children fit our width
-                    scale *= overallScaleFactor;
-                }
-
-                AnimateTo(child, 0, widthSoFar, (ourSize.Height - child.DesiredSize.Height) / 2, scale, duration);
+                AnimateTo(child, widthSoFar, (ourSize.Height - child.DesiredSize.Height) / 2, scale, duration);
                 widthSoFar += child.DesiredSize.Width * scale;
             }
 
             wasMouseOver = IsMouseOver;
         }
 
-        private void AnimateTo(UIElement child, double r, double x, double y, double s, double duration)
+        private void AnimateTo(UIElement child, double x, double y, double s, double duration)
         {
             TransformGroup group = (TransformGroup)child.RenderTransform;
             ScaleTransform scale = (ScaleTransform)group.Children[0];
             TranslateTransform trans = (TranslateTransform)group.Children[1];
-            //            RotateTransform rot = (RotateTransform)group.Children[2];
 
             if (duration == 0)
             {
@@ -252,42 +212,32 @@ namespace Aska.WPF.Controls
                 trans.BeginAnimation(TranslateTransform.YProperty, null);
                 scale.BeginAnimation(ScaleTransform.ScaleXProperty, null);
                 scale.BeginAnimation(ScaleTransform.ScaleYProperty, null);
-                //                rot.BeginAnimation(RotateTransform.AngleProperty, null);
                 trans.X = x;
                 trans.Y = y;
                 scale.ScaleX = s;
                 scale.ScaleY = s;
-                //                rot.AngleProperty = r;
-                animation_Completed(null, null);
+                Animation_Completed(null, null);
             }
             else
             {
-                trans.BeginAnimation(TranslateTransform.XProperty, MakeAnimation(x, duration, animation_Completed));
+                trans.BeginAnimation(TranslateTransform.XProperty, MakeAnimation(x, duration, Animation_Completed));
                 trans.BeginAnimation(TranslateTransform.YProperty, MakeAnimation(y, duration));
                 scale.BeginAnimation(ScaleTransform.ScaleXProperty, MakeAnimation(s, duration));
                 scale.BeginAnimation(ScaleTransform.ScaleYProperty, MakeAnimation(s, duration));
-                //                rot.BeginAnimation(RotateTransform.AngleProperty, MakeAnimation(r, duration));
             }
         }
 
-        private DoubleAnimation MakeAnimation(double to, double duration)
-        {
-            return MakeAnimation(to, duration, null);
-        }
+        private static DoubleAnimation MakeAnimation(double to, double duration) => MakeAnimation(to, duration, null);
 
-        private DoubleAnimation MakeAnimation(double to, double duration, EventHandler endEvent)
+        private static DoubleAnimation MakeAnimation(double to, double duration, EventHandler? endEvent)
         {
-            DoubleAnimation anim = new DoubleAnimation(to, TimeSpan.FromMilliseconds(duration));
+            DoubleAnimation anim = new(to, TimeSpan.FromMilliseconds(duration));
             anim.AccelerationRatio = 0.2;
             anim.DecelerationRatio = 0.7;
-            if (endEvent != null)
-                anim.Completed += endEvent;
+            if (endEvent != null) anim.Completed += endEvent;
             return anim;
         }
 
-        void animation_Completed(object sender, EventArgs e)
-        {
-            animating = false;
-        }
+        private void Animation_Completed(object? sender, EventArgs? e) => animating = false;
     }
 }
