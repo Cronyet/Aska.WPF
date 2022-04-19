@@ -13,12 +13,14 @@
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
 		<PackageIcon>Icon.png</PackageIcon>
+        <VersionPrefix>1.0.2</VersionPrefix>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Folder Include="Brushes\" />
 		<Folder Include="Animation\" />
 		<Folder Include="Styles\" />
+        <Folder Include="Controls\" />
 	</ItemGroup>
 
 	<ItemGroup>
