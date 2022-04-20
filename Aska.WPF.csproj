@@ -19,8 +19,6 @@
 	<ItemGroup>
 		<Folder Include="Brushes\" />
 		<Folder Include="Animation\" />
-		<Folder Include="Styles\" />
-        <Folder Include="Controls\" />
 	</ItemGroup>
 
 	<ItemGroup>
