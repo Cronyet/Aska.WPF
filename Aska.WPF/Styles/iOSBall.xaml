@@ -10,8 +10,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
+
     <Style x:Key="OptionMarkFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -21,6 +23,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF"/>
     <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
     <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
@@ -125,6 +128,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="CheckRadioFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -134,6 +138,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="SliderCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="BorderThickness" Value="1"/>

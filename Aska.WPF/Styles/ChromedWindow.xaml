@@ -1,5 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Aska.WPF.Styles"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:Double x:Key="ChromedWindow_TitleBar">29</sys:Double>
+    
     <Style x:Key="ChromedWindow" TargetType="Window">
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -9,7 +13,7 @@
                               UseAeroCaptionButtons="True"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Content">
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
 
@@ -19,8 +23,9 @@
 
                             <!--#region TitleBar -->
                             <Border Margin="0,-29,140,0" VerticalAlignment="Top"
-                                    Background="{TemplateBinding Background}" Height="29">
-                                <TextBlock Text="这是标题栏" Foreground="Blue"/>
+                                    Background="{TemplateBinding Background}"
+                                    Height="{DynamicResource ChromedWindow_TitleBar_Height}">
+                                <ContentPresenter Content="{DynamicResource ChromedWindow_TitleBar}"/>
                             </Border>
                             <!--#endregion-->
 
